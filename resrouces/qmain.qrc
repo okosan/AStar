@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/dlgimage">
+        <file>aboutEndrobene.png</file>
+        <file>howtoCell.PNG</file>
+    </qresource>
+</RCC>
