@@ -1,6 +1,6 @@
-#include "stdafx.h"
+﻿#include "stable.h"
+
 #include "qmain.h"
-#include <QApplication>
 
 //Q_IMPORT_PLUGIN(qjpeg)
 //Q_IMPORT_PLUGIN(qtiff)

@@ -1,12 +1,7 @@
 ﻿#pragma once
-
-#include "stdafx.h"
+#include "stable.h"
 
 #include "ui_qdlg_reposition.h"
-
-#include <QGraphicsRectItem>
-#include <QGraphicsOpacityEffect>
-#include <QObject>
 
 const float rect_side = 70.0f;
 
@@ -28,7 +23,7 @@ class XGraphicsRectItemRepo : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    XGraphicsRectItemRepo( const QRectF & rect, QGraphicsItem * parent = 0 ): 
+    XGraphicsRectItemRepo( const QRectF & rect, QGraphicsItem * parent = 0 ):
         QGraphicsRectItem (rect, parent = 0 )
     {
 
@@ -164,7 +159,7 @@ public:
 
         //this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 
-        // alerady set up in 
+        // alerady set up in
         QApplication::connect(sbVertical,SIGNAL(valueChanged(int)),this,SLOT(slotVerticalSbChanged(int)) );
         QApplication::connect(sbHorizontal,SIGNAL(valueChanged(int)),this,SLOT(slotHorizontalSbChanged(int)) );
 
@@ -195,7 +190,7 @@ public:
             // direct correspondance between translation and slider
             ty = valueY;
             updateRectPos();
-        }    
+        }
 
         void slotRectangleMoved(int posX,int posY)
         {

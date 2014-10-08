@@ -1,5 +1,4 @@
-// this is unicode
-#include "stdafx.h"
+﻿#include "stable.h"
 
 #include "map.h"
 

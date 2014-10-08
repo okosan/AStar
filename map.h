@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "stdafx.h"
+#include "stable.h"
 
 #include "arr2d.h"
 
@@ -56,7 +56,7 @@ public:
 
     /*
     void GenerateStatic();
-    int GenerateMap(float q, float m); // q = % of empty space, m - mazity          
+    int GenerateMap(float q, float m); // q = % of empty space, m - mazity
     */
 
     int saveToFile(char *filename);

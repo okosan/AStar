@@ -1,17 +1,8 @@
 ﻿#pragma once
-
-// QT dependent class
-
-#include <QWidget>
-#include <QGraphicsView>
-#include <QGraphicsOpacityEffect>
-#include <QtPrintSupport/QPrinter>
-#include <QInputEvent>
+#include "stable.h"
 
 #include "map.h"
 #include "arr2d.h"
-
-#include "stdafx.h"
 
 const QColor     COLOR_WALL(55,155,255);
 const QColor     COLOR_SRC(255,64,0xFF);
@@ -86,7 +77,7 @@ public:
     int setCellValue(int ix, int iy,float val);
     int free(); // free all objects (requires initialization after)
     int clear(); // clear map and objects stands previous
-    // if full update - delete objects and recreate, else - size of map is previous 
+    // if full update - delete objects and recreate, else - size of map is previous
     // and update cells colors, dest & src cells
     int update(int fullupdate = 0);
 

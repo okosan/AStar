@@ -1,7 +1,6 @@
-#include "stdafx.h"
+﻿#include "stable.h"
 
 #include "pathfinder.h"
-
 
 int PATHFINDER::saveToFile(char *fn)
 {

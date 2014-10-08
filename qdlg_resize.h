@@ -1,6 +1,5 @@
-#pragma once
-
-#include "stdafx.h"
+﻿#pragma once
+#include "stable.h"
 
 #include "ui_qdlg_resize.h"
 
@@ -20,7 +19,7 @@ public:
         QApplication::connect(this->spbWidth,SIGNAL(valueChanged(int)),this,SLOT(slotSetWidth(int)));
         QApplication::connect(this->spbHeight,SIGNAL(valueChanged(int)),this,SLOT(slotSetHeight(int)));
 
-        // alerady set up in 
+        // alerady set up in
         //QApplication::connect(this->okButton,SIGNAL(clicked()),this,SLOT(accept()));
         //QApplication::connect(this->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
     }

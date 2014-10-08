@@ -1,8 +1,7 @@
-﻿// QT dependent class
-#include "stdafx.h"
+﻿#include "stable.h"
 
 #include "qcellwidget.h"
-#include <QGraphicsRectItem>
+
 
 bool QCellWidget::isValidCell(int ix,int iy)
 {
@@ -70,7 +69,7 @@ int QCellWidget::init(MAPDATA *map_,QGraphicsScene *gs_,int cellsize_)
 
     this->setScene(gs);
 
-    return 0;          
+    return 0;
 }
 
 inline int QCellWidget::getCellAtPos(float x, float y, int &ix, int &iy)
@@ -205,7 +204,7 @@ int QCellWidget::clear() // clear map and objects stands previous
     return 0;
 }
 
-// if full update - delete objects and recreate, else - size of map is previous 
+// if full update - delete objects and recreate, else - size of map is previous
 // and update cells colors, dest & src cells
 int QCellWidget::update(int fullupdate)
 {
@@ -358,7 +357,7 @@ int QCellWidget::update(int fullupdate)
 
     if (!selection_initialized()) init_selection();
 
-    return 0;          
+    return 0;
 }
 
 int QCellWidget::setCellSize(int side_size)
@@ -404,7 +403,7 @@ void QCellWidget::zoomReset()
     fzoom = 1.0;
     //this->resetTransform();
     QTransform transf;
-    transf.reset();               
+    transf.reset();
     transf.scale(fzoom,fzoom);
     this->setTransform(transf);
 }
@@ -420,7 +419,7 @@ void QCellWidget::zoomFitAll()
     float cy = ((float)h/2.0f) * cellsize;
 
     this->centerOn(cx,cy);
-    //fzoom = 
+    //fzoom =
     QTransform transf = this->transform();
     fzoom = transf.m11();
 }
@@ -591,8 +590,6 @@ void QCellWidget::keyPressEvent(QKeyEvent *ke)
         break;
 
     }
-
-
 }
 
 int QCellWidget::saveToPicture(QString fn)
@@ -616,6 +613,7 @@ int QCellWidget::saveToPicture(QString fn)
         */
         return 1;
     }
+
     return 0;
 }
 
@@ -628,7 +626,7 @@ int QCellWidget::saveToPrinter(QPrinter *prn)
     QPainter painter;
     painter.begin(prn);
 
-    //QRectF 
+    //QRectF
     QRectF ppr = prn->pageRect();
 
     float scalef = 0.8f;
@@ -651,6 +649,7 @@ int QCellWidget::getMapRect(QRectF &rcf)
     float widthf = w * cellsize;
     float heightf = h * cellsize;
     rcf = QRectF(0,0,widthf,heightf);
+
     return 0;
 }
 
@@ -716,6 +715,7 @@ int QCellWidget::saveMapCostToImage(QString fn)
     // 0 - means clear
 
     for (int iy = 0; iy < h; iy++)
+    {
         for (int ix = 0; ix < w; ix++)
         {
             float fCurrentCost;
@@ -723,12 +723,13 @@ int QCellWidget::saveMapCostToImage(QString fn)
             if (fCurrentCost == CELL_SRC || fCurrentCost == CELL_DST)
                 fCurrentCost = 0; // Replace src & dst costs with zeros
 
-            img.setPixel(ix,iy,min((int)(fCurrentCost*255.0f),255));
+            img.setPixel(ix,iy,std::min((int)(fCurrentCost*255.0f),255));
         }
+    }
 
-        img.save(fn);
+    img.save(fn);
 
-        return 0;
+    return 0;
 }
 
 int QCellWidget::translateMap(int tx,int ty,float fill_value)

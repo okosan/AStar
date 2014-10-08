@@ -11,16 +11,20 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Astar
 TEMPLATE = app
 
+PRECOMPILED_HEADER = stable.h
+win32-msvc* {
+PRECOMPILED_SOURCE = stable.cpp
+}
+
 SOURCES +=  main.cpp\
             qmain.cpp\
-            stdafx.cpp\
             qcellwidget.cpp\
             map.cpp\
-            pathfinder.cpp
+            pathfinder.cpp \
+            stable.cpp
 
 HEADERS += \
             qmain.h\
-            stdafx.h\
             qcellwidget.h\
             qdlg_about.h\
             qdlg_howto.h\
@@ -30,14 +34,13 @@ HEADERS += \
             map.h\
             pathfinder.h\
             qpathviewer.h\
+            stable.h
 
 FORMS    += qdlg_about.ui\
             qdlg_howto.ui\
             qdlg_reposition.ui\
             qdlg_resize.ui\
             qmain.ui
-
-#RESOURCES += ./resources/qmain.qrc
 
 RESOURCES += \
             resrouces/qmain.qrc

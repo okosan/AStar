@@ -1,8 +1,7 @@
 ﻿#pragma once
+#include "stable.h"
 
-#include "stdafx.h"
-
-// Version 2 - linear array
+// TODO: delegate memory mgmt to stl
 
 template<typename T>
 class ARR2D
@@ -25,10 +24,12 @@ public:
         this->alloc(src.w,src.h);
 
         for (int iy = 0; iy < h; iy++)
+        {
             for (int ix = 0; ix < w; ix++)
             {
                 this->setItem(ix,iy,src.getItem(ix,iy));
             }
+        }
     }
 
     ARR2D(int w_, int h_): w(0),h(0),f_init(0),pItem(0)
@@ -74,13 +75,15 @@ public:
 
         pItem = new T [numItems];
         for (int y = 0;y<h_;y++)
+        {
             for (int x = 0; x<w_; x++)
             {
                 setItem(x,y,0);
-            };
+            }
+        }
 
-            f_init = 1;
-            return 0;
+        f_init = 1;
+        return 0;
     }
 
     int resize(int w_,int h_)
@@ -90,21 +93,25 @@ public:
 
         T *newArr = new T [w_*h_];
         for (int y = 0;y<h_;y++)
+        {
             for (int x = 0; x<w_; x++)
             {
                 setArrValue(newArr,x,y,w_,0.0);
-            };;
+            }
+        }
 
-        int minw = min(w,w_);
-        int maxw = max(w,w_);
-        int miny = min(h,h_);
-        int maxy = max(h,h_);
+        int minw = std::min(w,w_);
+        int maxw = std::max(w,w_);
+        int miny = std::min(h,h_);
+        int maxy = std::max(h,h_);
 
         for (int y = 0; y<miny; y++)
         {
             for (int x=0; x < minw; x++)
+            {
                 setArrValue(newArr,x,y,w_,this->getItem(x,y));
-        };
+            }
+        }
 
         delete [] pItem;
         pItem = newArr;
@@ -136,7 +143,7 @@ public:
         return NULL;
     }
 
-    bool __forceinline isValidPos(int x, int y)
+    bool inline isValidPos(int x, int y)
     {
         if (x < w && y < h && x >= 0 && y >= 0)
             return 1;
@@ -164,10 +171,16 @@ public:
         if (!f) return 2;
         fprintf(f,"%d %d",w,h);
         for (int y = 0;y<h; y++)
+        {
             for (int x=0; x<w; x++)
+            {
                 fprintf(f,"%f ", getItem(x,y));
+            }
+        }
 
-        if (!fclose(f)) return 7;
+        if (!fclose(f))
+            return 7;
+
         return 0;
     }
 
@@ -175,11 +188,13 @@ public:
     {
         if (pItem == NULL) return 1;
         for (int iy = 0; iy < h; iy++)
+        {
             for (int ix = 0; ix < w; ix++)
             {
                 setItem(ix,iy,fill_value);
             }
-            return 0;
+        }
+        return 0;
     }
 
     // operator << - > copy of minimum size
@@ -194,7 +209,7 @@ public:
 
     */
 
-    // operator = automatically realloc space if 
+    // operator = automatically realloc space if
     // size is not suitable
     // can throw exception (badalloc&integer -1)
     ARR2D<T> & operator=(const ARR2D<T> &src)
@@ -210,11 +225,13 @@ public:
         this->alloc(src.w,src.h);
 
         for (int iy = 0; iy < h; iy++)
+        {
             for (int ix = 0; ix < w; ix++)
             {
                 setItem(ix,iy,src.getItem(ix,iy));
             }
-            return *this;
+        }
+        return *this;
     }
 
     // low performance algorithm !!!
@@ -261,12 +278,14 @@ public:
         int syi;
 
         for (dyi = dy,syi = sy; (dyi < h && syi <= sh); dyi++,syi++)
+        {
             for (dxi = dx,sxi = sx; (dxi < w && sxi <= sw); dxi++,sxi++)
             {
                 setItem(dxi,dyi,tmp_array.getItem(sxi,syi));
-            };
+            }
+        }
 
-            return 0;
+        return 0;
     }
 private:
     T *pItem;

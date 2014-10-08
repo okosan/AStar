@@ -1,6 +1,5 @@
-#pragma once
-
-#include "stdafx.h"
+﻿#pragma once
+#include "stable.h"
 
 #include "ui_qdlg_howto.h"
 
@@ -14,7 +13,7 @@ public:
         this->setupUi(this);
         this->retranslateUi(this);
 
-        // alerady set up in 
+        // alerady set up in
         //QApplication::connect(this->okButton,SIGNAL(clicked()),this,SLOT(accept()));
         //QApplication::connect(this->cancelButton,SIGNAL(clicked()),this,SLOT(reject()));
     }

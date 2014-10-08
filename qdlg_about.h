@@ -1,6 +1,5 @@
 ﻿#pragma once
-
-#include "stdafx.h"
+#include "stable.h"
 
 #include "ui_qdlg_about.h"
 

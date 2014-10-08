@@ -1,19 +1,14 @@
 ﻿#pragma once
+#include "stable.h"
 
 #include "pathfinder.h"
 #include "qcellwidget.h"
-
-#include <QWidget>
-#include <QGraphicsView>
-#include <QVector>
-
 
 const float DEFAULT_CIRCLE_RADIUS = 6.5f;
 
 class PATHVIEWER
 {
 private:
-
     class PATHPOINT
     {
     public:
@@ -31,22 +26,22 @@ private:
     };
 
     QColor    clrPathLine;
-    QPen    pnPathLine;
+    QPen      pnPathLine;
 
     QColor    clrDstE;
     QColor    clrDstI;
     QBrush    brDstI;
-    QPen    pnDstE;
+    QPen      pnDstE;
 
     QColor    clrSrcE;
     QColor    clrSrcI;
     QBrush    brSrcI;
-    QPen    pnSrcE;
+    QPen      pnSrcE;
 
     QColor    clrNorI;
     QColor    clrNorE;
     QBrush    brNorI;
-    QPen    pnNorE;
+    QPen      pnNorE;
 
 
 private:
@@ -59,8 +54,8 @@ private:
     QCellWidget *mapview;
 
 public:
-    PATHVIEWER() : 
-        grPath(0), 
+    PATHVIEWER() :
+        grPath(0),
         pathfinder(0),gs(0),mapview(0)
     {
         clrPathLine = QColor(0x99,0x00,0x00);
@@ -89,6 +84,7 @@ public:
         gs = gs_;
         mapview = mapview_;
         vPoints.clear();
+
         return 0;
     }
 
@@ -122,7 +118,7 @@ public:
         float cx = rcf.left() + rcf.width()/2.f;
         float cy = rcf.top() + rcf.height()/2.f;
 
-        QRectF rcfCircle(cx - DEFAULT_CIRCLE_RADIUS,cy - DEFAULT_CIRCLE_RADIUS, 
+        QRectF rcfCircle(cx - DEFAULT_CIRCLE_RADIUS,cy - DEFAULT_CIRCLE_RADIUS,
             2.f*DEFAULT_CIRCLE_RADIUS, 2.f*DEFAULT_CIRCLE_RADIUS);
 
         PATHPOINT pp;
@@ -148,7 +144,7 @@ public:
         }
         vPoints.push_back(pp);
 
-        return 0;        
+        return 0;
     }
 
     int update(int fullupdate = 0)
@@ -174,6 +170,5 @@ public:
 
         return 0;
     }
-
 
 };

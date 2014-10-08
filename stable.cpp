@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+﻿#include "stable.h"
 
 
 void xfBeep(int freq, int duration)

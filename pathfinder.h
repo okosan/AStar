@@ -1,7 +1,8 @@
 ﻿#pragma once
+#include "stable.h"
 
 #include "map.h"
-#include <limits>
+
 
 // Much more faster data structure
 /*
@@ -18,7 +19,7 @@ CELL1 *parent;
 2) bool array of map_closed
 2) map_open class (find (ix,iy),etc).
 3) CELL factory
-4) getSibling(index) -> genSibling (SIBLING_STRUCT -> array of 8 siblings) and getSibling is 
+4) getSibling(index) -> genSibling (SIBLING_STRUCT -> array of 8 siblings) and getSibling is
 */
 
 /*
@@ -35,14 +36,13 @@ private:
 public:
     int ix;
     int iy;
-    float f,g,h;
+    int parent_ix, parent_iy;
 
-    int parent_ix;
-    int parent_iy;
+    float f,g,h;
 
     inline bool hasParent() { return (parent_ix < 0 || parent_iy < 0)?0:1; }
     bool inline isClosed() { return f_closed; }
-    bool inline setClosed() { f_closed = 1; }
+    void inline setClosed() { f_closed = 1; }
 
     CELL() : parent_ix(-1),parent_iy(-1),g(0),h(0),f(0),f_closed(0) { }
     CELL(int ix_,int iy_,float Gs_,float H_,const CELL *parent_):
@@ -234,7 +234,7 @@ public:
             std::list<CELL>::iterator currIter = findOpenMinimalF();
             if (currIter == open.end())
             {
-                if (verbose) fprintf(f,"open list is empty. Exitting loop.\n");                    
+                if (verbose) fprintf(f,"open list is empty. Exitting loop.\n");
                 break; // open list is empty
             }
 
@@ -412,7 +412,7 @@ public:
 
     inline float Heuristics(int x0,int y0,int x1,int y1)
     {
-        //return manhattan_length(x0,y0,x1,y1); // 
+        //return manhattan_length(x0,y0,x1,y1); //
         return euclidian_length(x0,y0,x1,y1); // gives much better results
     }
 
@@ -682,7 +682,7 @@ public:
         case(2): sx = ix+1; sy = iy; break;
         case(4): sx = ix; sy = iy+1; break;
         case(6): sx = ix-1; sy = iy; break;
-            // check diagonals for 1,3,5,7          
+            // check diagonals for 1,3,5,7
         case(1):
             {
                 map->getCost(ix,iy-1,fCost1);
@@ -746,7 +746,7 @@ public:
         return 0;
     }
 
-    // returns sibling cell to Base. writes to retSibling. 
+    // returns sibling cell to Base. writes to retSibling.
     inline int getSibling(const CELL *base,int index,CELL *retSibling,float &cost)
     {
         retSibling->parent_ix = base->ix;

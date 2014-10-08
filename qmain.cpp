@@ -1,4 +1,5 @@
-﻿#include "stdafx.h"
+﻿#include "stable.h"
+
 #include "qmain.h"
 
 const int TMR_INTERVAL = 4;
@@ -127,7 +128,7 @@ void WndMain::SaveConfig()
             fprintf(f,"%s",strRelPath.toLatin1().data());
             fclose(f);
         }
-    }     
+    }
 }
 
 int WndMain::InitMap()
@@ -149,7 +150,7 @@ int WndMain::InitMap()
     ui.sbZoom->setValue(ui.cellView->zoom()*100.0f);
 
 
-    return 0;     
+    return 0;
 }
 
 WndMain::~WndMain()
@@ -170,7 +171,7 @@ void WndMain::findPath(int flags)
     //XTimer xtimer;
     //xtimer.begin();
 
-    pathfinder.find(flags); // 
+    pathfinder.find(flags); //
 
     //xtimer.end();
 
