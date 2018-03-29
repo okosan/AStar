@@ -10,7 +10,6 @@ MAPDATA::MAPDATA()
 
 MAPDATA::~MAPDATA()
 {
-    //f_init=0;
 
 }
 
@@ -58,18 +57,18 @@ int MAPDATA::setCost(int x,int y,float cost)
 
 int MAPDATA::getCost(int x,int y,float &cost)
 {
-    if (isValid(x,y))
+    if (isValid(x, y))
     {
-        arrCost.getItem(x,y,cost);
+        arrCost.getItem(x, y, cost);
         return 0;
     }
     cost = CELL_WALL; // !!!
     return 1;
 }
 
-int MAPDATA::setCellHeight(int x,int y,float height)
+int MAPDATA::setCellHeight(int x, int y, float height)
 {
-    if (isValid(x,y))
+    if (isValid(x, y))
     {
         arrHeight.getItem(x,y,height);
         return 0;
@@ -92,13 +91,13 @@ bool MAPDATA::isValid(int x,int y)
     if ( (x >= w) || (y>=h) || (x < 0) || (y < 0) )
         return 0;
     return 1;
-};
+}
 
 int MAPDATA::printMapDbg()
 {
     FILE *f = fopen("map.dbg1.txt","wt");
     fprintf(f,"\t Cost data output:\n");
-    for (int y=0;y<h;y++)
+    for (int y=0; y<h; y++)
     {
         for (int x=0;x<w;x++)
         {
@@ -110,15 +109,22 @@ int MAPDATA::printMapDbg()
             }
             else
             {
-                if (cost == CELL_DST) fprintf(f," d");
+                if (cost == CELL_DST)
+                {
+                    fprintf(f," d");
+                }
+                else if (cost == CELL_SRC)
+                {
+                    fprintf(f," s");
+                }
                 else
-                    if (cost == CELL_SRC) fprintf(f," s");
-                    else
-                        fprintf(f,"%2f",cost);
-            };
-        };
+                {
+                    fprintf(f, "%2f", cost);
+                }
+            }
+        }
         fprintf(f,"\n");
-    };
+    }
     return 0;
 }
 
@@ -126,16 +132,27 @@ int MAPDATA::saveToFile(char *filename)
 {
     FILE *f = fopen(filename,"wt");
     if (!f) return 2;
-    fprintf(f,"%d %d ",w,h);
+    fprintf(f, "%d %d ", w, h);
     for (int y = 0;y<h; y++)
+    {
         for (int x=0; x<w; x++)
+        {
             fprintf(f,"%f ", arrCost.getItem(x,y));
+        }
+    }
 
     for (int y = 0;y<h; y++)
+    {
         for (int x=0; x<w; x++)
+        {
             fprintf(f,"%f ", arrHeight.getItem(x,y));
+        }
+    }
 
-    if (!fclose(f)) return 7;
+    if (!fclose(f))
+    {
+        return 7;
+    }
 
     return 0;
 }
@@ -145,20 +162,34 @@ int MAPDATA::loadFromFile(char *filename)
     destroy();
 
     FILE *f = fopen(filename,"rt");
-    if (!f) return 2;
+    if (!f)
+    {
+        return 2;
+    }
     fscanf(f,"%d %d ",&w,&h);
 
     allocate(w,h);
 
     for (int y = 0;y<h; y++)
+    {
         for (int x=0; x<w; x++)
+        {
             fscanf(f,"%f ", arrCost.getItemPtr(x,y));
+        }
+    }
 
     for (int y = 0;y<h; y++)
+    {
         for (int x=0; x<w; x++)
+        {
             fscanf(f,"%f ", arrHeight.getItemPtr(x,y));
+        }
+    }
 
-    if (!fclose(f)) return 7;
+    if (!fclose(f))
+    {
+        return 7;
+    }
 
     return 0;
 }
@@ -166,14 +197,22 @@ int MAPDATA::loadFromFile(char *filename)
 int MAPDATA::clear(int clearheight)
 {
     for (int y = 0;y<h; y++)
+    {
         for (int x=0; x<w; x++)
+        {
             arrCost.setItem(x,y,CELL_CLEAR);
+        }
+    }
 
     if (clearheight)
     {
         for (int y = 0;y<h; y++)
+        {
             for (int x=0; x<w; x++)
+            {
                 arrHeight.setItem(x,y,0.0f);
+            }
+        }
     }
 
     return 0;
@@ -209,11 +248,11 @@ int MAPDATA::translation(int tx,int ty,float fill_value)
 
 int MAPDATA::getSiblingInfo(UINT x, UINT y,SIBLING_STRUCT &sib)
 {
-    assert(isValid(x,y));
-    for (UINT i = 0; i<SIBLING_STRUCT::MAX_SIBLINGS;i++)
+    assert(isValid(x, y));
+    for (UINT i = 0; i< SIBLING_STRUCT::MAX_SIBLINGS; i++)
     {
 
     }
     return 0;
-};
+}
 

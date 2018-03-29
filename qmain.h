@@ -232,6 +232,7 @@ private:
 protected:
     void closeEvent(QCloseEvent *event)
     {
+        Q_UNUSED(event);
         SaveConfig();
     }
 

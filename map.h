@@ -21,6 +21,7 @@ struct SIBLING_STRUCT
     XCOORD coords[MAX_SIBLINGS];
 };
 
+
 class MAPDATA
 {
 private:
@@ -63,6 +64,4 @@ public:
     int loadFromFile(char *filename);
 
     int getSiblingInfo(UINT x, UINT y,SIBLING_STRUCT &sib);
-
-
-};
+};  // MAPDATA

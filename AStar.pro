@@ -21,7 +21,9 @@ SOURCES +=  main.cpp\
             qcellwidget.cpp\
             map.cpp\
             pathfinder.cpp \
-            stable.cpp
+            stable.cpp \
+    cell.cpp \
+    qpathviewer.cpp
 
 HEADERS += \
             qmain.h\
@@ -34,7 +36,9 @@ HEADERS += \
             map.h\
             pathfinder.h\
             qpathviewer.h\
-            stable.h
+            stable.h \
+    cell.h \
+    arr2d_impl.h
 
 FORMS    += qdlg_about.ui\
             qdlg_howto.ui\
