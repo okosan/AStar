@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "stable.h"
 
-#include "map.h"
-#include "arr2d.h"
+#include "pathfinder/map.h"
 
 const QColor     COLOR_WALL(55,155,255);
 const QColor     COLOR_SRC(255,64,0xFF);

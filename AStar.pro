@@ -16,29 +16,33 @@ win32-msvc* {
 PRECOMPILED_SOURCE = stable.cpp
 }
 
-SOURCES +=  main.cpp\
-            qmain.cpp\
-            qcellwidget.cpp\
-            map.cpp\
-            pathfinder.cpp \
-            stable.cpp \
-    cell.cpp \
-    qpathviewer.cpp
+SOURCES += \
+    main.cpp \
+    qmain.cpp \
+    qcellwidget.cpp \
+    stable.cpp \
+    qpathviewer.cpp \
+    pathfinder/cell.cpp \
+    pathfinder/map.cpp \
+    pathfinder/pathfinder.cpp
 
 HEADERS += \
-            qmain.h\
-            qcellwidget.h\
-            qdlg_about.h\
-            qdlg_howto.h\
-            qdlg_reposition.h\
-            qdlg_resize.h\
-            arr2d.h\
-            map.h\
-            pathfinder.h\
-            qpathviewer.h\
-            stable.h \
-    cell.h \
-    arr2d_impl.h
+    qmain.h \
+    qcellwidget.h \
+    qdlg_about.h \
+    qdlg_howto.h \
+    qdlg_reposition.h \
+    qdlg_resize.h \
+    qpathviewer.h \
+    stable.h \
+    pathfinder/arr2d.h \
+    pathfinder/arr2d_impl.h \
+    pathfinder/cell.h \
+    pathfinder/map.h \
+    pathfinder/pathfinder.h
+
+
+
 
 FORMS    += qdlg_about.ui\
             qdlg_howto.ui\

@@ -57,8 +57,8 @@ void CELL::setParent(const CELL *c)
 
 void CELL::init(CELL parent_, float gs, float h)
 {
-    Q_UNUSED(gs);
-    Q_UNUSED(h);
+    gs; // UNUSED
+    h;  // UNUSED
     parent_ix = parent_.ix;
     parent_iy = parent_.iy;
 }

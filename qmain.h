@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "stable.h"
 
+#include "pathfinder/pathfinder.h"
 
 #include "ui_qmain.h"
 #include "qdlg_resize.h"
@@ -8,13 +9,9 @@
 #include "qdlg_about.h"
 #include "qdlg_reposition.h"
 
-#include "map.h"
 
 #include "qcellwidget.h"
 #include "qpathviewer.h"
-
-#include "pathfinder.h"
-
 
 const float FZOOM_FIT = 10000.0f;
 const float FZOOM_FITWIDTH = 11000.0f;

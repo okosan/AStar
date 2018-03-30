@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "stable.h"
 
-#include "pathfinder.h"
+#include "pathfinder/pathfinder.h"
 #include "qcellwidget.h"
 
 class PATHVIEWER

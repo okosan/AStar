@@ -2,13 +2,7 @@
 #define STABLE_PRECOMPILED
 
 
-typedef unsigned int UINT;
-
 #ifdef __cplusplus
-
-
-
-
 #include <cmath>
 #include <ctime>
 #include <cassert>
@@ -39,19 +33,12 @@ typedef unsigned int UINT;
 
 #endif
 
-
-
 struct RECT
 {
     int left, right, top, bottom;
 };
 
 void xfBeep(int freq = 1000, int duration = 100);
-
-bool XFAIL(int ret);
-
-// TODO: need proper template
-float SQR(float val);
 
 bool xfBetween(double val, double val1, double val2);
 

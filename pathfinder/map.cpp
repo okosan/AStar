@@ -1,5 +1,12 @@
 ﻿#include "map.h"
 
+#include <cassert>
+
+// TODO: outdated convention
+bool XFAIL(int ret)
+{
+    return (ret != 0);
+}
 
 MAPDATA::MAPDATA()
 {

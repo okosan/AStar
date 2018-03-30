@@ -1,5 +1,4 @@
 #pragma once
-#include "stable.h"
 
 #include "map.h"
 
