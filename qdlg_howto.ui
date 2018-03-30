@@ -43,7 +43,7 @@
         <enum>Qt::AutoText</enum>
        </property>
        <property name="pixmap">
-        <pixmap resource="resrouces/qmain.qrc">:/dlgimage/howtoCell.PNG</pixmap>
+        <pixmap resource="resources/qmain.qrc">:/dlgimage/howtoCell.PNG</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -149,7 +149,7 @@ Ctrl + F12	- Clear map
   </layout>
  </widget>
  <resources>
-  <include location="resrouces/qmain.qrc"/>
+  <include location="resources/qmain.qrc"/>
  </resources>
  <connections>
   <connection>

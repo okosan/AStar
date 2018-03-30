@@ -45,7 +45,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="resrouces/qmain.qrc">:/dlgimage/aboutEndrobene.png</pixmap>
+          <pixmap resource="resources/qmain.qrc">:/dlgimage/aboutEndrobene.png</pixmap>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -143,7 +143,7 @@ git page:	https://github.com/okosan/pathfinder</string>
   </layout>
  </widget>
  <resources>
-  <include location="resrouces/qmain.qrc"/>
+  <include location="resources/qmain.qrc"/>
  </resources>
  <connections>
   <connection>

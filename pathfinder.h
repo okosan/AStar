@@ -25,6 +25,7 @@ public:
     void printCellData(FILE *f, char *str, const CELL &c);
 
     int find(int findflag = 0, const int verbose = 0);
+    int find(int srcX, int srcY, int dstX, int dstY, int findflag = 0, const int verbose = 0);
 
     int findfast();
 
@@ -76,6 +77,8 @@ private:
     bool pathFound;
     float pathLength;  // in units of cells
     float pathCost;  // in units of power
+
+    // TODO: move to locals of find function
     CELL src;
     CELL dst;
 };  // class PATHFINDER

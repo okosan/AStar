@@ -46,5 +46,6 @@ FORMS    += qdlg_about.ui\
             qdlg_resize.ui\
             qmain.ui
 
-RESOURCES += \
-            resrouces/qmain.qrc
+RESOURCES += resources/qmain.qrc
+
+

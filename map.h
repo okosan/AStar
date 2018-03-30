@@ -45,7 +45,7 @@ public:
     int setCellHeight(int x,int y,float height);
     int getCellHeight(int x,int y,float &height);
 
-    bool isValid(int x,int y);
+    bool isValid(int x, int y);
 
     int printMapDbg();
 
@@ -63,5 +63,5 @@ public:
     int saveToFile(char *filename);
     int loadFromFile(char *filename);
 
-    int getSiblingInfo(UINT x, UINT y,SIBLING_STRUCT &sib);
+    int getSiblingInfo(UINT x, UINT y, SIBLING_STRUCT &sib);
 };  // MAPDATA

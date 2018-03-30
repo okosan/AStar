@@ -63,9 +63,24 @@ void PATHFINDER::printCellData(FILE *f, char *str, const CELL &c)
     fflush(f);
 }
 
-// TODO: split function - too long to read
 int PATHFINDER::find(int findflag, const int verbose)
 {
+    // TODO: work with local src, dst
+    if (XFAIL(findSrcLocation(src))) return 1;
+    if (XFAIL(findDstLocation(dst))) return 2;
+
+    int result = find(src.ix, src.iy, dst.ix, dst.iy, findflag, verbose);
+    return result;
+}
+
+// TODO: split function - too long to read
+int PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const int verbose)
+{
+    src.ix = srcX;
+    src.iy = srcY;
+    dst.ix = dstX;
+    dst.iy = dstY;
+
     pathFound = 0;
     pathLength = 0;
     pathCost = -1;
@@ -73,15 +88,12 @@ int PATHFINDER::find(int findflag, const int verbose)
     FILE *f = 0;
     if (verbose) f = fopen("dbg_find.txt","wt");
 
-    if (XFAIL(findSrcLocation(src))) return 1;
-    if (XFAIL(findDstLocation(dst))) return 2;
-
     src.g = 0;
     src.h = Heuristics(src.ix,src.iy,dst.ix,dst.iy);
     src.f = src.g + src.h;
 
-    if (verbose) printCellData(f,"SRC",src);
-    if (verbose) printCellData(f,"DST",dst);
+    if (verbose) printCellData(f, "SRC", src);
+    if (verbose) printCellData(f, "DST", dst);
 
     // erase lists
     open.clear();
@@ -129,35 +141,32 @@ int PATHFINDER::find(int findflag, const int verbose)
             float cost;
             if (XFAIL(getSibling(&current,index,&cellSibling,cost))) return 0;
 
-            if (cost == CELL_WALL) continue; // simply skip walls
+            if (cost == CELL_WALL)
+            {
+                continue; // simply skip walls
+            }
 
             if (verbose) fprintf(f," * found sibling i = %d\n\t",index);
             if (verbose) printCellData(f, "\t Sibling = ", cellSibling);
 
-            ///*
             if (arrCellClosed.getItem(cellSibling.ix,cellSibling.iy)!=0)
             {
                 if (verbose) fprintf(f,"\t ... (!) but it is marked as closed. skip it\n");
                 continue; // ignore in closed list
-            };
-            //*/
-            // search in closed list for current sibling
-            /*
-            if (findInClosed(&cellSibling) != closed.end())
-            {
-            if (verbose) fprintf(f,"\t ... but the sibling is in CLOSED list. skip it\n");
-            continue; // ignore in closed list
             }
-            */
-
+            // search in closed list for current sibling
 
             // cost to move: current->sibling
             float g_sibling;
             bool f_use_costing = 1;
             if (f_use_costing)
+            {
                 g_sibling = getGsibling(current.ix,current.iy,cellSibling.ix,cellSibling.iy)*(1.0+3.5*cost);
+            }
             else
+            {
                 g_sibling = getGsibling(current.ix, current.iy, cellSibling.ix, cellSibling.iy);
+            }
             float g_move = current.g + g_sibling;
             if (verbose) fprintf(f, "\t g_cost from current to sibling is = %f\n", g_move);
 
@@ -171,14 +180,6 @@ int PATHFINDER::find(int findflag, const int verbose)
                 // compute cost
                 if (verbose) fprintf(f,"\t ... and this cell is already in open list\n\t");
                 if (verbose) printCellData(f,"\t > openItem info: ",(CELL)(*openItem));
-
-                /*
-                float g_sibling_alt = getGsibling(current.ix,current.iy,openItem->ix,openItem->iy);
-                if (g_sibling != g_sibling_alt)
-                {
-                Beep(1000,1000);
-                };
-                */
 
                 float alternative_G = current.g + g_sibling;
                 //float alternative_G = current.g + getGsibling(cellSibling.parent_ix,cellSibling.parent_iy,openItem->ix,openItem->iy);
@@ -207,7 +208,7 @@ int PATHFINDER::find(int findflag, const int verbose)
 
                     if (verbose) fprintf(f,"\t .... so we modified existed cell as if we went there thru sibling\n");
                     if (verbose) printCellData(f,"\t openItem Modified info is",(CELL)(*openItem));
-                };
+                }
             }
             else
             {
@@ -225,7 +226,7 @@ int PATHFINDER::find(int findflag, const int verbose)
                 open.push_back(cellSibling);
             } // else
 
-        }; // for siblings
+        }  // for siblings
     } // while(1)
     if (verbose) fprintf(f,"\n Loop finished\n");
 
@@ -394,7 +395,7 @@ int PATHFINDER::genPathList(int verbose)
     if (!pathFound)
         return 1;
 
-    std::list<CELL>::iterator pathItem = findInOpen(dst.ix,dst.iy);
+    std::list<CELL>::iterator pathItem = findInOpen(dst.ix, dst.iy);
     if (pathItem==open.end()) return 1;
     /*
     // search in CLOSED
@@ -507,7 +508,7 @@ int PATHFINDER::genPathList(int verbose)
         pathList.push_back(*pathItem);
     }
 
-    fprintf(f,"##########################\n\n");
+    if (verbose) fprintf(f,"##########################\n\n");
     float l = 0;
     int lastx = src.ix;
     int lasty = src.iy;
@@ -515,15 +516,17 @@ int PATHFINDER::genPathList(int verbose)
     for(std::list<CELL>::reverse_iterator c = (++pathList.rbegin());
         c != pathList.rend(); ++c)
     {
-        fprintf(f, "<%d,%d>\n", c->ix, c->iy);
+        if (verbose) fprintf(f, "<%d,%d>\n", c->ix, c->iy);
         l += this->getGsibling(lastx, lasty, c->ix, c->iy);
         lastx = c->ix;
         lasty = c->iy;
     }
 
-    fprintf(f,"length = %f\n", l);
+    pathLength = l;
 
-    fclose(f);
+    if (verbose) fprintf(f,"length = %f\n", l);
+
+    if (verbose) fclose(f);
 
     return 0;
 }
