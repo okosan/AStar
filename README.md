@@ -1,4 +1,4 @@
-##AStar
+## AStar
 
 ### Description
 A* path find sample with 2D map editor in Qt.
