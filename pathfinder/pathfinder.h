@@ -25,10 +25,8 @@ public:
 
     void printCellData(FILE *f, char *str, const CELL &c);
 
-    int find(int findflag = 0, const int verbose = 0);
-    int find(int srcX, int srcY, int dstX, int dstY, int findflag = 0, const int verbose = 0);
-
-    int findfast();
+    bool find(int findflag = 0, const int verbose = 0);
+    bool find(int srcX, int srcY, int dstX, int dstY, int findflag = 0, const int verbose = 0);
 
     // path length between two sibling cells
     // function will return wrong result if distance > 1 cell (i.e. cell not sibling)

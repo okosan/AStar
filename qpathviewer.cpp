@@ -114,22 +114,12 @@ int PATHVIEWER::update(int fullupdate)
 {
     clearPath();
     // compose path here
-    //pathfinder->genPathList();
+
     CELL cell;
     foreach(cell, pathfinder->pathList)
     {
         addPoint(cell.ix, cell.iy);
     }
-
-    /*
-    addPoint(5,5);
-    addPoint(5,10);
-    addPoint(9,10);
-    addPoint(10,10);
-    //addPoint(3,12);
-    addPoint(11,10);
-    addPoint(11,14);
-    */
 
     return 0;
 }

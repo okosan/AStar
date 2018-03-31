@@ -66,18 +66,21 @@ void PATHFINDER::printCellData(FILE *f, char *str, const CELL &c)
     fflush(f);
 }
 
-int PATHFINDER::find(int findflag, const int verbose)
+bool PATHFINDER::find(int findflag, const int verbose)
 {
     // TODO: work with local src, dst
-    if (XFAIL(findSrcLocation(src))) return 1;
-    if (XFAIL(findDstLocation(dst))) return 2;
+    if (XFAIL(findSrcLocation(src)))
+        return false;
 
-    int result = find(src.ix, src.iy, dst.ix, dst.iy, findflag, verbose);
+    if (XFAIL(findDstLocation(dst)))
+        return false;
+
+    bool result = find(src.ix, src.iy, dst.ix, dst.iy, findflag, verbose);
     return result;
 }
 
 // TODO: split function - too long to read
-int PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const int verbose)
+bool PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const int verbose)
 {
     src.ix = srcX;
     src.iy = srcY;
@@ -142,7 +145,8 @@ int PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const
         {
             CELL cellSibling;
             float cost;
-            if (XFAIL(getSibling(&current,index,&cellSibling,cost))) return 0;
+            if (XFAIL(getSibling(&current,index,&cellSibling,cost)))
+                return true;  // TODO: why true?
 
             if (cost == CELL_WALL)
             {
@@ -155,7 +159,7 @@ int PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const
             if (arrCellClosed.getItem(cellSibling.ix,cellSibling.iy)!=0)
             {
                 if (verbose) fprintf(f,"\t ... (!) but it is marked as closed. skip it\n");
-                continue; // ignore in closed list
+                continue;  // ignore in closed list
             }
             // search in closed list for current sibling
 
@@ -252,18 +256,14 @@ int PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, const
 
     if (verbose) fclose(f);
 
-    genPathList();
+    int pathlist = genPathList();
+    if (XFAIL(pathlist))
+        return false;
 
     open.clear();
     closed.clear();
 
-    return 0;
-}
-
-int PATHFINDER::findfast()
-{
-
-    return 0;
+    return true;
 }
 
 float PATHFINDER::getGsibling(int xs, int ys, int xd, int yd, int f_deep)
