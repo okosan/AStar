@@ -23,7 +23,7 @@ public:
 
     int clearPath();
 
-    void printCellData(FILE *f, char *str, const CELL &c);
+    void printCellData(FILE *f, const char *str, const CELL &c);
 
     bool find(int findflag = 0, const int verbose = 0);
     bool find(int srcX, int srcY, int dstX, int dstY, int findflag = 0, const int verbose = 0);
@@ -47,7 +47,7 @@ public:
 
     // generates path list. called inside of find
     // TODO:: put dst in closed list before generating path, free open list
-    int genPathList(int verbose = 1);
+    int genPathList(int verbose);
 
     int findOnMap(float findCost, int &ixf, int &iyf);
 

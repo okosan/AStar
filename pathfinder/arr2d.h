@@ -60,7 +60,7 @@ private:
     T *pItem;
     int w;
     int h;
-    int f_init;
+    bool f_init;
 };
 
 #include "arr2d_impl.h"

@@ -37,11 +37,13 @@ void PATHFINDER::setCellG(float G, CELL *cCell)
 {
     if (cCell->hasParent())
     {
-        cCell->g = G + getGsibling(cCell->ix,cCell->iy,
-            cCell->parent_ix,cCell->parent_iy);
+        cCell->g = G + getGsibling(cCell->ix, cCell->iy,
+                                   cCell->parent_ix, cCell->parent_iy);
     }
     else
+    {
         cCell->g = G;
+    }
 }
 
 int PATHFINDER::clearPath()
@@ -56,7 +58,7 @@ int PATHFINDER::clearPath()
     return 0;
 }
 
-void PATHFINDER::printCellData(FILE *f, char *str, const CELL &c)
+void PATHFINDER::printCellData(FILE *f, const char *str, const CELL &c)
 {
     fprintf(f,"%s. Cell data: <%d,%d>, g = %f, h = %f, f = %f. Parent = <%d,%d>\n",
             str,
@@ -256,7 +258,7 @@ bool PATHFINDER::find(int srcX, int srcY, int dstX, int dstY, int findflag, cons
 
     if (verbose) fclose(f);
 
-    int pathlist = genPathList();
+    int pathlist = genPathList(verbose);
     if (XFAIL(pathlist))
         return false;
 

@@ -3,9 +3,9 @@
 CELL::CELL() :
     parent_ix(-1),
     parent_iy(-1),
+    f(0),
     g(0),
     h(0),
-    f(0),
     f_closed(0)
 {
 
@@ -14,6 +14,7 @@ CELL::CELL() :
 CELL::CELL(int ix_, int iy_, float Gs_, float H_, const CELL *parent_):
     ix(ix_),
     iy(iy_),
+    f(0),
     h(H_)
 {
     if (parent_)
@@ -57,8 +58,6 @@ void CELL::setParent(const CELL *c)
 
 void CELL::init(CELL parent_, float gs, float h)
 {
-    gs; // UNUSED
-    h;  // UNUSED
     parent_ix = parent_.ix;
     parent_iy = parent_.iy;
 }

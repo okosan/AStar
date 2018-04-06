@@ -2,20 +2,20 @@
 
 template <typename T>
 ARR2D<T>::ARR2D():
+    pItem(NULL),
     w(0),
     h(0),
-    f_init(0),
-    pItem(0)
+    f_init(false)
 {
 
 }
 
 template <typename T>
 ARR2D<T>::ARR2D(ARR2D<T> &src) :
+    pItem(NULL),
     w(0),
     h(0),
-    f_init(0),
-    pItem(0)
+    f_init(false)
 {
     if (src.w <= 0 || src.h <= 0)
     {
@@ -36,10 +36,10 @@ ARR2D<T>::ARR2D(ARR2D<T> &src) :
 
 template <typename T>
 ARR2D<T>::ARR2D(int w_, int h_):
+    pItem(NULL),
     w(0),
     h(0),
-    f_init(0),
-    pItem(0)
+    f_init(false)
 {
     if (w_ <= 0 || h_<= 0)
     {
@@ -75,7 +75,7 @@ int ARR2D<T>::destroy()
     {
         delete [] pItem;
         pItem = 0;
-        f_init = 0;
+        f_init = false;
         w = h = 0;
     }
     return 0;
@@ -104,7 +104,7 @@ int ARR2D<T>::alloc(int w_, int h_)
         }
     }
 
-    f_init = 1;
+    f_init = true;
     return 0;
 }
 
@@ -124,9 +124,7 @@ int ARR2D<T>::resize(int w_,int h_)
     }
 
     int minw = std::min(w,w_);
-    int maxw = std::max(w,w_);
     int miny = std::min(h,h_);
-    int maxy = std::max(h,h_);
 
     for (int y = 0; y<miny; y++)
     {
@@ -140,7 +138,7 @@ int ARR2D<T>::resize(int w_,int h_)
     pItem = newArr;
     w=w_;
     h=h_;
-    f_init = 1;
+    f_init = true;
     return 0;
 }
 
